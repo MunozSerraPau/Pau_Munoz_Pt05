@@ -20,7 +20,7 @@
     <?php include_once "./Controlador/controladorUsuaris.php" ?>
     
     <!-- Mirem si estem logeats i obtenim el nom del Usari amb el que estem -->
-    <?php if(isset($_SESSION['usuari'])): $nomUsuari = $_SESSION['usuari'] ?>
+    <?php if(isset($_SESSION['usuari']) && ($pagina <= $numeroPagines) ): $nomUsuari = $_SESSION['usuari'] ?>
         <!--aqui crear els selects pero nomes els que tinguin el nickname amb que s'ha iniciat secció  -->
         <header>
             <!-- Enlace a la izquierda para "Home" -->
@@ -44,6 +44,9 @@
                 </div>
             </div>
         </header>
+
+
+        
         <h1 style="text-align: center; margin-top: 25px;"><strong>CAMPEONS</strong></h1>
         
         <br> <br>
@@ -113,7 +116,7 @@
             </ul>
         </nav> 
 
-    <?php else: ?>
+    <?php elseif ($pagina <= $numeroPagines): ?>
         <header>
         <div class="home">
             <a href="./index.php">Home</a>
@@ -183,7 +186,10 @@
                     <li class="page-item"><a class="page-link" href="?pagina=<?php echo $pagina + 1 ?>">Següent</a></li>
                 <?php endif; ?>
             </ul>
-        </nav> 
+        </nav>
+    <?php else: ?>
+        <?php $pagina = 1;
+        header("Location: index.php"); ?>
     <?php endif ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
