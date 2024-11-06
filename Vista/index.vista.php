@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./Style/index.css">
     <title>HOME</title>
 </head>
+
 <body>
 
     <!-- Script per fer la comprovació de eliminar el campio i que no s'elimini directament -->
@@ -16,18 +18,43 @@
             return confirm("¿Estás seguro de que quieres eliminar este artículo?");
         }
     </script>
+    <nav>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Active</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+    </nav>
 
     <?php include_once "./Controlador/controladorUsuaris.php" ?>
-    
+
     <!-- Mirem si estem logeats i obtenim el nom del Usari amb el que estem -->
-    <?php if(isset($_SESSION['usuari']) && ($pagina <= $numeroPagines) ): $nomUsuari = $_SESSION['usuari'] ?>
+    <?php if (isset($_SESSION['usuari']) && ($pagina <= $numeroPagines)): $nomUsuari = $_SESSION['usuari'] ?>
         <!--aqui crear els selects pero nomes els que tinguin el nickname amb que s'ha iniciat secció  -->
         <header>
             <!-- Enlace a la izquierda para "Home" -->
             <div class="home">
                 <a href="./index.php">Home</a>
             </div>
-            
+
             <!-- Título centrado -->
             <div class="title">
                 <h1><?php echo $nomUsuari ?></h1>
@@ -39,16 +66,16 @@
                     <?php echo $nomUsuari ?>
                 </button>
                 <div class="dropdown-content">
-                    <a href="./Controlador/controladorLogOut.php" >Log Out</a>
+                    <a href="./Controlador/controladorLogOut.php">Log Out</a>
                     <a href="./Vista/canviarContrasenya.vista.php">Caniviar Contrasenya</a>
                 </div>
             </div>
         </header>
 
+        <?php include "navbar.vista.php" ?>
 
-        
         <h1 style="text-align: center; margin-top: 25px;"><strong>CAMPEONS</strong></h1>
-        
+
         <br> <br>
 
         <div class="d-grid gap-2 col-3 mx-auto">
@@ -85,20 +112,20 @@
                 </div>
             <?php endforeach; ?>
         </div>
-        
+
         <!-- part per fer la paguinacio dels champs  -->
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <?php if($pagina == 0): ?>
+                <?php if ($pagina == 0): ?>
                     <li class="page-item"><a class="page-link disabled">Enrere</a></li>
-                <?php elseif($pagina == 1): ?>
+                <?php elseif ($pagina == 1): ?>
                     <li class="page-item"><a class="page-link disabled">Enrere</a></li>
                 <?php else: ?>
                     <li class="page-item"><a class="page-link" href="?pagina=<?php echo $pagina - 1 ?>">Enrere</a></li>
                 <?php endif; ?>
 
 
-                <?php for($i = 1; $i <= $numeroPagines; $i++): ?>
+                <?php for ($i = 1; $i <= $numeroPagines; $i++): ?>
                     <?php if ($pagina === $i): ?>
                         <li class='page-item disabled'><a class='page-link' href='?pagina=<?php echo $i ?>'><?php echo $i ?></a></li>
                     <?php else: ?>
@@ -106,36 +133,36 @@
                     <?php endif ?>
                 <?php endfor ?>
 
-                <?php if($pagina == 0): ?>
+                <?php if ($pagina == 0): ?>
                     <li class="page-item"><a class="page-link disabled">Següent</a></li>
-                <?php elseif($pagina == $numeroPagines): ?>
+                <?php elseif ($pagina == $numeroPagines): ?>
                     <li class="page-item"><a class="page-link disabled">Següent</a></li>
                 <?php else: ?>
                     <li class="page-item"><a class="page-link" href="?pagina=<?php echo $pagina + 1 ?>">Següent</a></li>
                 <?php endif; ?>
             </ul>
-        </nav> 
+        </nav>
 
     <?php elseif ($pagina <= $numeroPagines): ?>
         <header>
-        <div class="home">
-            <a href="./index.php">Home</a>
-        </div>
-        <!-- Título centrado -->
-        <div class="title">
-            <h1>Inici d'usuaris i registre de sessions</h1>
-        </div>
-        <!-- Perfil desplegable a la derecha -->
-        <div class="profile-dropdown">
-            <button class="profile-btn">
-                <img src="https://via.placeholder.com/40" alt="Icono Perfil" class="profile-icon">
-                Perfil
-            </button>
-            <div class="dropdown-content">
-                <a href="./Vista/login.php">Login</a>
-                <a href="./Vista/signUp.php">Sign Up</a>
+            <div class="home">
+                <a href="./index.php">Home</a>
             </div>
-        </div>
+            <!-- Título centrado -->
+            <div class="title">
+                <h1>Inici d'usuaris i registre de sessions</h1>
+            </div>
+            <!-- Perfil desplegable a la derecha -->
+            <div class="profile-dropdown">
+                <button class="profile-btn">
+                    <img src="https://via.placeholder.com/40" alt="Icono Perfil" class="profile-icon">
+                    Perfil
+                </button>
+                <div class="dropdown-content">
+                    <a href="./Vista/login.php">Login</a>
+                    <a href="./Vista/signUp.php">Sign Up</a>
+                </div>
+            </div>
         </header>
         <h1 style="text-align: center; margin-top: 25px;"><strong>CAMPEONS</strong></h1>
         <div class="row row-cols-1 row-cols-md-4 g-5">
@@ -156,21 +183,21 @@
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?> 
+            <?php endforeach; ?>
         </div>
-            
+
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-            <?php if($pagina == 0): ?>
+                <?php if ($pagina == 0): ?>
                     <li class="page-item"><a class="page-link disabled">Enrere</a></li>
-                <?php elseif($pagina == 1): ?>
+                <?php elseif ($pagina == 1): ?>
                     <li class="page-item"><a class="page-link disabled">Enrere</a></li>
                 <?php else: ?>
                     <li class="page-item"><a class="page-link" href="?pagina=<?php echo $pagina - 1 ?>">Enrere</a></li>
                 <?php endif; ?>
 
 
-                <?php for($i = 1; $i <= $numeroPagines; $i++): ?>
+                <?php for ($i = 1; $i <= $numeroPagines; $i++): ?>
                     <?php if ($pagina === $i): ?>
                         <li class='page-item disabled'><a class='page-link' href='?pagina=<?php echo $i ?>'><?php echo $i ?></a></li>
                     <?php else: ?>
@@ -178,9 +205,9 @@
                     <?php endif ?>
                 <?php endfor ?>
 
-                <?php if($pagina == 0): ?>
+                <?php if ($pagina == 0): ?>
                     <li class="page-item"><a class="page-link disabled">Següent</a></li>
-                <?php elseif($pagina == $numeroPagines): ?>
+                <?php elseif ($pagina == $numeroPagines): ?>
                     <li class="page-item"><a class="page-link disabled">Següent</a></li>
                 <?php else: ?>
                     <li class="page-item"><a class="page-link" href="?pagina=<?php echo $pagina + 1 ?>">Següent</a></li>
@@ -194,4 +221,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+
 </html>
